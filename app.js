@@ -19,9 +19,18 @@ function displayUsers(users) {
     userListDiv.innerHTML=''; 
     users.forEach((user) => {
         const userDiv = document.createElement('div');
-        userDiv.innerHTML = `${user.name}`;
+        userDiv.innerHTML = `${user.name} <button class="deleteBtn" data-id="${user.id}">Delete</button>`;
         userListDiv.appendChild(userDiv);
     });
+
+    // Add click event listeners to the delete buttons
+    const deleteButtons = document.querySelectorAll('.deleteBtn');
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const userId = event.target.getAttribute('data-id');
+            deleteUser(userId);
+        });
+    }); 
 }
 
 // Fetch and display users
@@ -61,3 +70,22 @@ userFormElement.addEventListener('submit', (event) => {
     // Hide the form again
     userForm.style.display = 'none';
 });
+
+//delete user
+function deleteUser(userId) {
+    const index = usersList.findIndex((user) => user.id == userId);
+    if (index !== -1) {
+        usersList.splice(index, 1);
+
+        //It is done to map userId after delete operation
+        MapUserId(usersList);
+
+        displayUsers(usersList);
+    }
+}
+
+function MapUserId(users){
+    users.forEach((user,idx)=>{
+        user.id=idx;
+    });
+}
