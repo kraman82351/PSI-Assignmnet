@@ -3,10 +3,24 @@
 <head>
  <meta charset="UTF-8">
  <title>Debugging and Feature Enhancement Assignment</title>
+ <link rel="stylesheet" href="style.css">
  <script src="app.js" async></script>
 </head>
 <body>
- <h1>User List</h1>
- <div id="usersList"></div>
+    <div>
+        <h1>User List</h1>
+        <div id="usersList" class="user-card"></div>
+     </div>
+     <div>
+        <button id="openFormButton">Add User</button>
+        <div class="user-form">
+            <h2>Add User</h2>
+            <form id="userForm">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" name="userName" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
