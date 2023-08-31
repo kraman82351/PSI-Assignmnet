@@ -89,3 +89,19 @@ function MapUserId(users){
         user.id=idx;
     });
 }
+
+//search Users
+// Function to filter and display users based on search input
+function searchUsers(searchTerm) {
+    const filteredUsers = usersList.filter((user) => {
+        return user.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    displayUsers(filteredUsers);
+}
+
+// Add an event listener to the search button
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', () => {
+    const searchInput = document.getElementById('searchInput').value;
+    searchUsers(searchInput);
+});
