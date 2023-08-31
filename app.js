@@ -1,8 +1,13 @@
-let usersList=[
+let usersList = JSON.parse(localStorage.getItem('usersList')) || [
     { id: 0, name: 'Alice', }, 
     { id: 1, name: 'Bob', }, 
     { id: 2, name: 'Catherine'},
 ];
+
+
+function saveUsersToLocalStorage() {
+    localStorage.setItem('usersList', JSON.stringify(usersList));
+}
 
 // Simulated user data fetch function (meant to represent an API call)
 function fetchUsers(callback) {
@@ -61,6 +66,9 @@ userFormElement.addEventListener('submit', (event) => {
     // You can add your logic here to do something with the user name (e.g., add it to a list)
     usersList.push({id:usersList.length,name:userName});
     
+    saveUsersToLocalStorage();
+
+
     //display users after adding
     displayUsers(usersList);
 
@@ -79,7 +87,7 @@ function deleteUser(userId) {
 
         //It is done to map userId after delete operation
         MapUserId(usersList);
-
+        saveUsersToLocalStorage();
         displayUsers(usersList);
     }
 }
